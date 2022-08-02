@@ -11,6 +11,7 @@ import br.com.dio.app.repositories.core.createProgressDialog
 import br.com.dio.app.repositories.core.hideSoftKeyboard
 import br.com.dio.app.repositories.databinding.ActivityMainBinding
 import br.com.dio.app.repositories.presentation.MainViewModel
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
@@ -42,6 +43,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
             }
         }
+        viewModel.owner.observe(this){
+            Glide.with(binding.root.context)
+              .load(it.avatarURL).into(binding.ivOwner)
+            binding.tvOwnerName.text = it.login
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

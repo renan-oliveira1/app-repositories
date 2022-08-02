@@ -31,8 +31,8 @@ class RepoListAdapter : ListAdapter<Repo, RepoListAdapter.ViewHolder>(DiffCallba
             binding.tvRepoLanguage.text = item.language
             binding.chipStar.text = item.stargazersCount.toString()
 
-            Glide.with(binding.root.context)
-                .load(item.owner.avatarURL).into(binding.ivOwner)
+            //Glide.with(binding.root.context)
+              //  .load(item.owner.avatarURL).into(binding.ivOwner)
         }
     }
 }

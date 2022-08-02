@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.dio.app.repositories.data.model.Owner
 import br.com.dio.app.repositories.data.model.Repo
 import br.com.dio.app.repositories.domain.ListUserRepositoriesUseCase
 import kotlinx.coroutines.flow.catch
@@ -18,6 +19,10 @@ class MainViewModel(
     private val _repos = MutableLiveData<State>()
     val repos: LiveData<State> = _repos
 
+    private val _owner = MutableLiveData<Owner>()
+    val owner: LiveData<Owner> = _owner
+
+
     fun getRepoList(user: String) {
         viewModelScope.launch {
             listUserRepositoriesUseCase(user)
@@ -29,6 +34,7 @@ class MainViewModel(
                 }
                 .collect {
                     _repos.postValue(State.Success(it))
+                    _owner.postValue(it[0].owner)
                 }
         }
     }
